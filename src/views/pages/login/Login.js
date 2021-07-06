@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import axios from 'axios';
 import {
   CButton,
   CCard,
@@ -17,13 +18,40 @@ import {
 import CIcon from "@coreui/icons-react";
 
 const Login = () => {
-  const [email, setEmail] = useState("admin");
-  const [password, setPassword] = useState("123456");
+  const [username, setUseName] = useState("");
+  const [password, setPassword] = useState("");
+  const history = useHistory()
+  useEffect(()=>{
+    if(localStorage.getItem('user-info')){
+      history.push("/dashboard")
+    }
+  }
+  )
+  async function login (){
+    try {
+      let item = {username,password}
+      let res = await fetch('http://171.244.141.137/auth/login',{
+        method:'POST',
+            Headers:{
+              "Content-Type":"application/json",
+              "Accept":'application/json'
+            },
+          body:JSON.stringify(item)
+         
+        
+      })
+      res = await res.json()
+      //localStorage.setItem(JSON.stringify(res))
+      history.push('/dashboard')
+    } catch (error) {
+      console.log("er",error);
+    }
+  }
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
       <CContainer>
         <CRow className="justify-content-center">
-          <CCol md="8">
+          <CCol md="5">
             <CCardGroup>
               <CCard className="p-4">
                 <CCardBody>
@@ -37,8 +65,9 @@ const Login = () => {
                         </CInputGroupText>
                       </CInputGroupPrepend>
                       <CInput
-                        type="text"
+                        type="username"
                         placeholder="Username"
+                        onChange={(e)=>setUseName(e.target.value)}
                         autoComplete="username"
                       />
                     </CInputGroup>
@@ -51,16 +80,17 @@ const Login = () => {
                       <CInput
                         type="password"
                         placeholder="Password"
+                        onChange={(e)=>setPassword(e.target.value)}
                         autoComplete="current-password"
                       />
                     </CInputGroup>
                     <CRow>
                       <CCol xs="6">
-                        <Link to="/dashboard">
-                          <CButton color="primary" className="px-4">
+                        {/* <Link to="/dashboard"> */}
+                          <CButton color="primary" onClick = {login} className="px-4">
                             Login
                           </CButton>
-                        </Link>
+                        {/* </Link> */}
                       </CCol>
                       <CCol xs="6" className="text-right">
                         <CButton color="link" className="px-0">
@@ -69,31 +99,6 @@ const Login = () => {
                       </CCol>
                     </CRow>
                   </CForm>
-                </CCardBody>
-              </CCard>
-              <CCard
-                className="text-white bg-primary py-5 d-md-down-none"
-                style={{ width: "44%" }}
-              >
-                <CCardBody className="text-center">
-                  <div>
-                    <h2>Sign up</h2>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.
-                    </p>
-                    <Link to="/register">
-                      <CButton
-                        color="primary"
-                        className="mt-3"
-                        active
-                        tabIndex={-1}
-                      >
-                        Register Now!
-                      </CButton>
-                    </Link>
-                  </div>
                 </CCardBody>
               </CCard>
             </CCardGroup>
