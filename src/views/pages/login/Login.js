@@ -30,18 +30,17 @@ const Login = () => {
   async function login (){
     try {
       let item = {username,password}
-      let res = await fetch('http://171.244.141.137/auth/login',{
+      console.log(item)
+      let res = await axios('http://171.244.141.137/auth/login',{
         method:'POST',
-            Headers:{
+        headers:{
               "Content-Type":"application/json",
               "Accept":'application/json'
             },
-          body:JSON.stringify(item)
-         
-        
+          data:JSON.stringify(item)
       })
-      res = await res.json()
-      //localStorage.setItem(JSON.stringify(res))
+      res = await res.data
+      localStorage.setItem("user",JSON.stringify(res))
       history.push('/dashboard')
     } catch (error) {
       console.log("er",error);
