@@ -43,7 +43,7 @@ const Login = () => {
       localStorage.setItem("user",JSON.stringify(res))
       history.push('/dashboard')
     } catch (error) {
-      console.log("er",error);
+      console.log("err",error);
     }
   }
   return (

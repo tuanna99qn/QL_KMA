@@ -1,11 +1,42 @@
-import React from "react";
+import React, {useState} from "react";
 import { Button, Table, Card } from "antd";
 import Modal from "antd/lib/modal/Modal";
 import ModalClassA from "./modalClassA";
+import axios from "axios";
+
 const ClassA = () => {
+
+  let [subjectRoom, setSubjectRoom] = useState({ hits: [] })
+  const [user, setUser] = useState("")
+  const [evaluate, setEvaluate] = useState("")
+  const [tp1, setTp1] = useState("")
+  const [tp2, setTp2] = useState("")
+  const [thi, setThi] = useState("")
+  const [TKHP, setTKHP] = useState("")
+
+  async function subject (){
+    try {
+      let res = await axios('http://171.244.141.137/user-point',{
+        method:'GET',
+        headers:{
+          "Content-Type":"application/json",
+          "Accept":'application/json',
+          'Authorization':`Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoZWFkZXIiOnsiYWxnIjoiSFMyNTYiLCJ0eXAiOiJKV1QifSwicGF5bG9hZCI6eyJkYXRhIjp7InVpZCI6IjYwZGFiZjI3NDY4N2M3NWQ5YzRkMjk0ZSIsInVzZXJUeXBlIjoidGVhY2hlciJ9LCJpYXQiOjE2MjUxNTYwMjYsImV4cCI6MTYyNTE1OTYyNn0sImlhdCI6MTYyNTY4MDY5N30.kQi6HS92EwkRDCuSGQnAtZIfI7SpuOBTey0lZbaHfTg"}`,
+        },
+      })
+      res = await res.data
+
+      setSubjectRoom = res.data[0].subjectRoom
+      console.log("res",setSubjectRoom)
+    } catch (error) {
+      console.log("err",error);
+    }
+  }
+
+  subject()
   const dataSource = [
     {
-      id: "DT010234",
+      id: `${setSubjectRoom}`,
       name: "tuan",
       tp1: 9,
       tp2: 7,
