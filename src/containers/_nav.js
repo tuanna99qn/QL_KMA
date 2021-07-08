@@ -1,37 +1,38 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import CIcon from "@coreui/icons-react";
 import axios from "axios";
 
-export  const GetClass = ()=>{
+export const GetClass = (props) => {
   let [dataClass, setDataClass] = useState([])
-  useEffect(()=>{
-    async function getClass (){
+  useEffect(() => {
+    async function getClass() {
       try {
-        let req = await axios('http://171.244.141.137/subject/room',{
-          method:'GET',
-          headers:{
-            "Content-Type":"application/json",
-            "Accept":'application/json',
-            'Authorization':`Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoZWFkZXIiOnsiYWxnIjoiSFMyNTYiLCJ0eXAiOiJKV1QifSwicGF5bG9hZCI6eyJkYXRhIjp7InVpZCI6IjYwZGFiZjI3NDY4N2M3NWQ5YzRkMjk0ZSIsInVzZXJUeXBlIjoidGVhY2hlciJ9LCJpYXQiOjE2MjUxNTYwMjYsImV4cCI6MTYyNTE1OTYyNn0sImlhdCI6MTYyNTY4MDY5N30.kQi6HS92EwkRDCuSGQnAtZIfI7SpuOBTey0lZbaHfTg"}`,
+        let req = await axios('http://171.244.141.137/subject/room', {
+          method: 'GET',
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": 'application/json',
+            'Authorization': `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoZWFkZXIiOnsiYWxnIjoiSFMyNTYiLCJ0eXAiOiJKV1QifSwicGF5bG9hZCI6eyJkYXRhIjp7InVpZCI6IjYwZGFiZjI3NDY4N2M3NWQ5YzRkMjk0ZSIsInVzZXJUeXBlIjoidGVhY2hlciJ9LCJpYXQiOjE2MjUxNTYwMjYsImV4cCI6MTYyNTE1OTYyNn0sImlhdCI6MTYyNTY4MDY5N30.kQi6HS92EwkRDCuSGQnAtZIfI7SpuOBTey0lZbaHfTg"}`,
           },
         })
         setDataClass(req.data.data)
-      
+
         return req
       } catch (error) {
-        console.log("err",error);
+        console.log("err", error);
       }
     }
-  
+
     getClass()
   }, [])
-  console.log("dataClass",dataClass)
+  console.log("dataClass", dataClass)
+  return <></>
 
 }
 
 
 const _nav = [
- 
+
   {
     _tag: "CSidebarNavItem",
     name: "AdminManager",

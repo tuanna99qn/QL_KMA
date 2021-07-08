@@ -3,7 +3,8 @@ import { Button, Table, Card } from "antd";
 import Modal from "antd/lib/modal/Modal";
 import ModalClassA from "./modalClassA";
 import axios from "axios";
-import {GetClass} from "../../../containers/_nav"
+import { GetClass } from "src/containers/_nav";
+// import GetClass from "../../../containers/_nav"
 
 const ClassA = () => {
 
@@ -65,7 +66,7 @@ console.log("subjectRoom",subjectRoom)
 
   return (
     <>
-      <GetClass/>
+      <GetClass />
       <Card>
         <Table key={subjectRoom.id}
         dataSource={subjectRoom} 

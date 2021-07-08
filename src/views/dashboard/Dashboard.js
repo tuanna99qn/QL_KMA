@@ -1,7 +1,7 @@
 import React from "react";
-
+import { GetClass } from "src/containers/_nav";
 function Dashboard() {
-  return <div>HELLO WORLD</div>;
+  return <GetClass />;
 }
 
 export default Dashboard;
