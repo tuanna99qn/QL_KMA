@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import CIcon from "@coreui/icons-react";
 import axios from "axios";
+import {useDispatch} from "react-redux";
+import {message} from "antd";
+import { connect } from 'react-redux'
+import {useGlobalState} from "../logical/glocalState";
 
 export const GetClass = (props) => {
   let [dataClass, setDataClass] = useState([])
@@ -22,17 +26,17 @@ export const GetClass = (props) => {
         console.log("err", error);
       }
     }
-
+ // ham nay goi o dau day =)) ? cu get la se call duoc api a uk ok
     getClass()
   }, [])
   console.log("dataClass", dataClass)
-  return <></>
+  return <>
+  <div>aaaa</div>
+  </>
 
 }
 
-
 const _nav = [
-
   {
     _tag: "CSidebarNavItem",
     name: "AdminManager",
@@ -46,6 +50,7 @@ const _nav = [
     icon: "cil-puzzle",
   },
   {
+
     _tag: "CSidebarNavDropdown",
     name: "Subject",
     route: "/subject",
@@ -56,202 +61,14 @@ const _nav = [
         name: "ClassA",
         to: "/subject/classA",
       },
+      {
+        _tag: "CSidebarNavItem",
+        name: "ClassAs",
+        to: "/subject/classAs", // cai nay a / yeoo
+      },
     ],
+
   },
-  // {
-  //   _tag: "CSidebarNavDropdown",
-  //   name: "Base",
-  //   route: "/base",
-  //   icon: "cil-puzzle",
-  //   _children: [
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "Breadcrumb",
-  //       to: "/base/breadcrumbs",
-  //     },
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "Cards",
-  //       to: "/base/cards",
-  //     },
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "Carousel",
-  //       to: "/base/carousels",
-  //     },
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "Collapse",
-  //       to: "/base/collapses",
-  //     },
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "Forms",
-  //       to: "/base/forms",
-  //     },
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "Jumbotron",
-  //       to: "/base/jumbotrons",
-  //     },
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "List group",
-  //       to: "/base/list-groups",
-  //     },
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "Navs",
-  //       to: "/base/navs",
-  //     },
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "Navbars",
-  //       to: "/base/navbars",
-  //     },
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "Pagination",
-  //       to: "/base/paginations",
-  //     },
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "Popovers",
-  //       to: "/base/popovers",
-  //     },
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "Progress",
-  //       to: "/base/progress-bar",
-  //     },
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "Switches",
-  //       to: "/base/switches",
-  //     },
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "Tables",
-  //       to: "/base/tables",
-  //     },
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "Tabs",
-  //       to: "/base/tabs",
-  //     },
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "Tooltips",
-  //       to: "/base/tooltips",
-  //     },
-  //   ],
-  // },
-  // {
-  //   _tag: "CSidebarNavDropdown",
-  //   name: "Buttons",
-  //   route: "/buttons",
-  //   icon: "cil-cursor",
-  //   _children: [
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "Buttons",
-  //       to: "/buttons/buttons",
-  //     },
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "Brand buttons",
-  //       to: "/buttons/brand-buttons",
-  //     },
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "Buttons groups",
-  //       to: "/buttons/button-groups",
-  //     },
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "Dropdowns",
-  //       to: "/buttons/button-dropdowns",
-  //     },
-  //   ],
-  // },
-  // {
-  //   _tag: "CSidebarNavItem",
-  //   name: "Charts",
-  //   to: "/charts",
-  //   icon: "cil-chart-pie",
-  // },
-  // {
-  //   _tag: "CSidebarNavDropdown",
-  //   name: "Icons",
-  //   route: "/icons",
-  //   icon: "cil-star",
-  //   _children: [
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "CoreUI Free",
-  //       to: "/icons/coreui-icons",
-  //       badge: {
-  //         color: "success",
-  //         text: "NEW",
-  //       },
-  //     },
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "CoreUI Flags",
-  //       to: "/icons/flags",
-  //     },
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "CoreUI Brands",
-  //       to: "/icons/brands",
-  //     },
-  //   ],
-  // },
-  // {
-  //   _tag: "CSidebarNavDropdown",
-  //   name: "Notifications",
-  //   route: "/notifications",
-  //   icon: "cil-bell",
-  //   _children: [
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "Alerts",
-  //       to: "/notifications/alerts",
-  //     },
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "Badges",
-  //       to: "/notifications/badges",
-  //     },
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "Modal",
-  //       to: "/notifications/modals",
-  //     },
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "Toaster",
-  //       to: "/notifications/toaster",
-  //     },
-  //   ],
-  // },
-  // {
-  //   _tag: "CSidebarNavItem",
-  //   name: "Widgets",
-  //   to: "/widgets",
-  //   icon: "cil-calculator",
-  //   badge: {
-  //     color: "info",
-  //     text: "NEW",
-  //   },
-  // },
-  // {
-  //   _tag: "CSidebarNavDivider",
-  // },
-  // {
-  //   _tag: "CSidebarNavTitle",
-  //   _children: ["Extras"],
-  // },
   {
     _tag: "CSidebarNavDropdown",
     name: "Pages",
@@ -280,59 +97,45 @@ const _nav = [
       },
     ],
   },
-  // {
-  //   _tag: "CSidebarNavItem",
-  //   name: "Disabled",
-  //   icon: "cil-ban",
-  //   badge: {
-  //     color: "secondary",
-  //     text: "NEW",
-  //   },
-  //   addLinkClass: "c-disabled",
-  //   disabled: true,
-  // },
-  // {
-  //   _tag: "CSidebarNavDivider",
-  //   className: "m-2",
-  // },
-  // {
-  //   _tag: "CSidebarNavTitle",
-  //   _children: ["Labels"],
-  // },
-  // {
-  //   _tag: "CSidebarNavItem",
-  //   name: "Label danger",
-  //   to: "",
-  //   icon: {
-  //     name: "cil-star",
-  //     className: "text-danger",
-  //   },
-  //   label: true,
-  // },
-  // {
-  //   _tag: "CSidebarNavItem",
-  //   name: "Label info",
-  //   to: "",
-  //   icon: {
-  //     name: "cil-star",
-  //     className: "text-info",
-  //   },
-  //   label: true,
-  // },
-  // {
-  //   _tag: "CSidebarNavItem",
-  //   name: "Label warning",
-  //   to: "",
-  //   icon: {
-  //     name: "cil-star",
-  //     className: "text-warning",
-  //   },
-  //   label: true,
-  // },
-  // {
-  //   _tag: "CSidebarNavDivider",
-  //   className: "m-2",
-  // },
+
 ];
 
 export default _nav;
+
+export  const mapToNav = (data)=>{
+  let children =  data.map(m=>({
+    _tag: "CSidebarNavItem",
+    name: m.name,
+    to: "/subject/"+m._id,
+  }))
+  let nav = [..._nav]
+  nav.forEach(m=>{
+    if (m.name != 'Subject'){
+      return
+    }
+    m._children = children
+  })
+  return nav
+}
+export const requestClass = async () => {
+  try {
+    let req = await axios('http://171.244.141.137/subject/room', {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": 'application/json',
+        'Authorization': `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoZWFkZXIiOnsiYWxnIjoiSFMyNTYiLCJ0eXAiOiJKV1QifSwicGF5bG9hZCI6eyJkYXRhIjp7InVpZCI6IjYwZGFiZjI3NDY4N2M3NWQ5YzRkMjk0ZSIsInVzZXJUeXBlIjoidGVhY2hlciJ9LCJpYXQiOjE2MjUxNTYwMjYsImV4cCI6MTYyNTE1OTYyNn0sImlhdCI6MTYyNTY4MDY5N30.kQi6HS92EwkRDCuSGQnAtZIfI7SpuOBTey0lZbaHfTg"}`,
+      },
+    })
+    return req.data
+  } catch (error) {
+    console.log("err", error);
+  }
+/*
+  return new Promise((resolve)=>{
+    resolve({data:[{
+      _id:"123",
+      name:"lop 1"
+    }]})
+  })*/
+}

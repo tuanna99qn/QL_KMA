@@ -11,7 +11,7 @@ import {
   CSidebarNavDropdown,
   CSidebarNavItem,
 } from '@coreui/react'
-
+import {useGlobalState} from '../logical/glocalState'
 import CIcon from '@coreui/icons-react'
 
 // sidebar nav config
@@ -20,6 +20,7 @@ import navigation from './_nav'
 const TheSidebar = () => {
   const dispatch = useDispatch()
   const show = useSelector(state => state.sidebarShow)
+  const [nav, ] = useGlobalState(global.navigationState)
 
   return (
     <CSidebar
@@ -39,9 +40,8 @@ const TheSidebar = () => {
         />
       </CSidebarBrand>
       <CSidebarNav>
-
         <CCreateElement
-          items={navigation}
+          items={nav}
           components={{
             CSidebarNavDivider,
             CSidebarNavDropdown,
@@ -54,5 +54,7 @@ const TheSidebar = () => {
     </CSidebar>
   )
 }
+// cho redux vao day chua?
+// chua anh e viet ben thang _nav
 
 export default React.memo(TheSidebar)

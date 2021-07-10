@@ -9,7 +9,7 @@ const routes = [
   { path: "/", exact: true, name: "Home" },
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
   { path: "/subject", name: "Subject", exact: true },
-  { path: "/subject/classA", name: "ClassA", component: ClassA },
+  { path: "/subject/:id", name: "ClassA", component: ClassA },
   { path: "/manager", name: "ClassA", component: ManagerUsers },
   { path: "/managerccount", name: "ClassA", component: ManagerAccount },
 ];
