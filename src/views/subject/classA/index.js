@@ -25,7 +25,7 @@ const ClassA = (props) => {
           },
         })
         setSubjectRoom(req.data.data)
-
+        
         return req
       } catch (error) {
         console.log("err", error);
@@ -34,49 +34,76 @@ const ClassA = (props) => {
 
     subject()
   }, [])
-  console.log("subjectRoom", subjectRoom)
+ console.log("subjectRoom", subjectRoom)
+
+ const data = subjectRoom.map(row => ({ key:row._id, Name: row.user.userInfo.displayName, MSSV:row.user.userInfo.studentCode, TP1: row.TP1, TP2: row.TP2, THI:row.THI, TKHP: row.TKHP, evaluate:row.evaluate}));
 
 
-  const columns = [
-    {
-      title: "User",
-      dataIndex: "user",
-      key: "user",
+  console.log("data",data)
+const columns = [
+  {
+    title: 'Name',
+    dataIndex: 'Name',
+    key: 'name',
+  },
+  {
+    title: 'MSSV',
+    dataIndex: 'MSSV',
+    key: 'mssv',
+  },
+  {
+    title: 'TP1',
+    dataIndex: 'TP1',
+    key: 'tp1',
+  },
+  {
+    title: 'TP2',
+    dataIndex: 'TP2',
+    key: 'tp2',
+  },
+  {
+    title: 'THI',
+    dataIndex: 'THI',
+    key: 'tp1',
+  },
+ 
+  {
+    title: 'TKHP',
+    dataIndex: 'TKHP',
+    key: 'tkhp',
+  },
+  {
+    title: 'evaluate',
+    dataIndex: 'evaluate',
+    key: 'evaluate',
+  },
+  {
+    render: () => {
+      return (
+        <>
+          <Button type="danger">Delete</Button>
+          <Button type="primary">
+            <ModalClassA/>
+          </Button>
+        </>
+      );
     },
-    {title: "subjectRoom", dataIndex: "subjectRoom", id: "subjectRoom"},
-    {title: "TP1", dataIndex: "TP1", id: "tp1"},
-    {title: "TP2", dataIndex: "TP2", id: "tp2"},
-    {title: "THI", dataIndex: "THI", id: "thi"},
-    {title: "TKHP", dataIndex: "TKHP", id: "TKHP"},
-    {
-      title: "evaluate",
-      dataIndex: "evaluate",
-      id: "evaluate",
-    },
-    {
-      render: () => {
-        return (
-          <>
-            <Button type="danger">Delete</Button>
-            <Button type="primary">
-              <ModalClassA/>
-            </Button>
-          </>
-        );
-      },
-    },
-  ];
+  },
+];
+return (
+<>
+  <GetClass/>
+  <Card>
+    <Table 
+      key = {data.key}
+           dataSource={data}
+           columns={columns}/>
+  </Card>
+</>
+)
 
-  return (
-    <>
-      <GetClass/>
-      <Card>
-        <Table key={subjectRoom.id}
-               dataSource={subjectRoom}
-               columns={columns}/>
-      </Card>
-    </>
-  );
+
+
 };
 
 export default ClassA;
