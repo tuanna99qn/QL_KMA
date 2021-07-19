@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CIcon from "@coreui/icons-react";
 import axios from "axios";
-import {useDispatch} from "react-redux";
-import {message} from "antd";
-import { connect } from 'react-redux'
 import {useGlobalState} from "../logical/glocalState";
 
 export const GetClass = (props) => {
@@ -29,9 +25,9 @@ export const GetClass = (props) => {
  // ham nay goi o dau day =)) ? cu get la se call duoc api a uk ok
     getClass()
   }, [])
-  console.log("dataClass", dataClass)
+//console.log("dataClass", dataClass)
   return <>
-  <div>aaaa</div>
+
   </>
 
 }
@@ -55,48 +51,44 @@ const _nav = [
     name: "Subject",
     route: "/subject",
     icon: "cil-puzzle",
-    _children: [
-      {
-        _tag: "CSidebarNavItem",
-        name: "ClassA",
-        to: "/subject/classA",
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: "ClassAs",
-        to: "/subject/classAs", // cai nay a / yeoo
-      },
-    ],
+    // _children: [
+    //   {
+    //     _tag: "CSidebarNavItem",
+    //     name: "ClassA",
+    //     to: "/subject/classA",
+    //   },
+     
+    // ],
 
   },
-  {
-    _tag: "CSidebarNavDropdown",
-    name: "Pages",
-    route: "/pages",
-    icon: "cil-star",
-    _children: [
-      {
-        _tag: "CSidebarNavItem",
-        name: "Login",
-        to: "/login",
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Register",
-        to: "/register",
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Error 404",
-        to: "/404",
-      },
-      {
-        _tag: "CSidebarNavItem",
-        name: "Error 500",
-        to: "/500",
-      },
-    ],
-  },
+  // {
+  //   _tag: "CSidebarNavDropdown",
+  //   name: "Pages",
+  //   route: "/pages",
+  //   icon: "cil-star",
+  //   _children: [
+  //     {
+  //       _tag: "CSidebarNavItem",
+  //       name: "Login",
+  //       to: "/login",
+  //     },
+  //     {
+  //       _tag: "CSidebarNavItem",
+  //       name: "Register",
+  //       to: "/register",
+  //     },
+  //     {
+  //       _tag: "CSidebarNavItem",
+  //       name: "Error 404",
+  //       to: "/404",
+  //     },
+  //     {
+  //       _tag: "CSidebarNavItem",
+  //       name: "Error 500",
+  //       to: "/500",
+  //     },
+  //   ],
+  // },
 
 ];
 
@@ -111,6 +103,7 @@ export  const mapToNav = (data)=>{
   let nav = [..._nav]
   nav.forEach(m=>{
     if (m.name != 'Subject'){
+     // console.log("nsads",m.name)
       return
     }
     m._children = children
@@ -127,15 +120,9 @@ export const requestClass = async () => {
         'Authorization': `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoZWFkZXIiOnsiYWxnIjoiSFMyNTYiLCJ0eXAiOiJKV1QifSwicGF5bG9hZCI6eyJkYXRhIjp7InVpZCI6IjYwZGFiZjI3NDY4N2M3NWQ5YzRkMjk0ZSIsInVzZXJUeXBlIjoidGVhY2hlciJ9LCJpYXQiOjE2MjUxNTYwMjYsImV4cCI6MTYyNTE1OTYyNn0sImlhdCI6MTYyNTY4MDY5N30.kQi6HS92EwkRDCuSGQnAtZIfI7SpuOBTey0lZbaHfTg"}`,
       },
     })
+ //   console.log("data class ae vao ma xem",req.data)
     return req.data
   } catch (error) {
     console.log("err", error);
   }
-/*
-  return new Promise((resolve)=>{
-    resolve({data:[{
-      _id:"123",
-      name:"lop 1"
-    }]})
-  })*/
 }

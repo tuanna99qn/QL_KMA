@@ -6,6 +6,12 @@ import axios from "axios";
 import {GetClass} from "src/containers/_nav";
 // import GetClass from "../../../containers/_nav"
 
+
+// reload 
+export  const handleClick = ()=>{
+ window.location.reload()
+
+}
 const ClassA = (props) => {
 
   let classId = props.match.params.id;
@@ -14,8 +20,10 @@ const ClassA = (props) => {
   let [subjectRoom, setSubjectRoom] = useState([])
 
   useEffect(() => {
+   
     async function subject() {
       try {
+     //   document.addEventListener('click', handleClick)
         let req = await axios(`http://171.244.141.137/user-point/${classId}`, {
           method: 'GET',
           headers: {
@@ -34,12 +42,12 @@ const ClassA = (props) => {
 
     subject()
   }, [])
- console.log("subjectRoom", subjectRoom)
+ //console.log("subjectRoom", subjectRoom)
 
  const data = subjectRoom.map(row => ({ key:row._id, Name: row.user.userInfo.displayName, MSSV:row.user.userInfo.studentCode, TP1: row.TP1, TP2: row.TP2, THI:row.THI, TKHP: row.TKHP, evaluate:row.evaluate}));
 
 
-  console.log("data",data)
+ // console.log("data",data)
 const columns = [
   {
     title: 'Name',

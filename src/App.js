@@ -3,6 +3,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import './scss/style.scss';
 import {requestClass, mapToNav} from './containers/_nav'
 import {useGlobalState} from "./logical/glocalState";
+import ClassA from './views/subject/classA';
 
 const loading = (
   <div className="pt-3 text-center">
@@ -18,14 +19,18 @@ const Login = React.lazy(() => import('./views/pages/login/Login'));
 const Register = React.lazy(() => import('./views/pages/register/Register'));
 const Page404 = React.lazy(() => import('./views/pages/page404/Page404'));
 const Page500 = React.lazy(() => import('./views/pages/page500/Page500'));
+const Class = React.lazy(()=>import('./views/subject/classA/index'))
 // cho dung function cho class vay
+
+
 const App = () => {
   let [,setNav] = useGlobalState(global.navigationState)
   useEffect(()=>{
     requestClass().then(m=>{
       let nav = mapToNav(m.data)
-      console.log('xxxx',nav)
+      console.log('cai nay la data menu ne thang ngu: ',nav)
       setNav(nav)
+     
     }).catch(e=>{
       console.log(e)
     });
