@@ -1,9 +1,10 @@
 import { Modal, Select, Input } from "antd";
 import FormItem from "antd/lib/form/FormItem";
 import React from "react";
-
+import index from "./index"
 const { Option } = Select;
-const ModalClassA = () => {
+const ModalClassA = (props) => {
+  console.log("props",)
   const [visible, setVisible] = React.useState(false);
   const [confirmLoading, setConfirmLoading] = React.useState(false);
   //   const [modalText, setModalText] = React.useState("Content of the modal");
@@ -47,26 +48,27 @@ const ModalClassA = () => {
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
       >
-        <FormItem label="ID">
-          <Input required="aaaaaaaaaaaaaaa" />
+        <FormItem label="Name">
+          <Input required="name" />
         </FormItem>
-        <FormItem label="name">
-          <Input required="aaaaaaaaaaaaaaa" />
+        <FormItem label="MSSV">
+          <Input required="mssv" />
         </FormItem>
-        <FormItem label="tp1">
-          <Input required="aaaaaaaaaaaaaaa" />
+        <FormItem label="TP1">
+          <Input required="tp1" />
         </FormItem>
-        <FormItem label="tp2">
-          <Input required="aaaaaaaaaaaaaaa" />
+        <FormItem label="TP2">
+          <Input required="tp2" />
         </FormItem>
-        <FormItem label="tp3">
-          <Input required="aaaaaaaaaaaaaaa" />
+        <FormItem label="THI">
+          <Input required="thi" />
         </FormItem>
-        <FormItem label="kthp">
-          <Input required="aaaaaaaaaaaaaaa" />
+        <FormItem label="TKHP">
+          <Input required="tkhp
+          " />
         </FormItem>
         <FormItem label="evaluate">
-          <Input required="aaaaaaaaaaaaaaa" />
+          <Input required="evaluate" />
         </FormItem>
       </Modal>
     </>
