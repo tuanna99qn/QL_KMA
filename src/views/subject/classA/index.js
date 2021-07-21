@@ -7,46 +7,54 @@ import axios from "axios";
 import { GetClass } from "src/containers/_nav";
 
 
-// reload 
-export const handleClick = () => {
-  window.location.reload()
 
-}
 const ClassA = (props) => {
   const [visible, setVisible] = React.useState(false);
   const [confirmLoading, setConfirmLoading] = React.useState(false);
   const [modalText, setModalText] = React.useState({});
   let [idDiem, setIdDiem] = useState([])
+  // "evaluate": "KHONG DAT",
+  // "TP1": "1",
+  // "TP2": "3",
+  // "THI": "8",
+  // "TKHP": "10"
+  let [TP1, SetTP1] = useState([])
+  let [TP2, SetTP2] = useState([])
+  let [THI, SetTHI] = useState([])
+  let [TKHP, SetTKHP] = useState([])
+  let [evaluate, SetEvaluate] = useState([])
   const showModal = (id) => {
 
     setIdDiem = id
     console.log("id", setIdDiem)
     setVisible(true);
   };
-const  deletePonit =  async (id)=>{
-  try {
-    //   document.addEventListener('click', handleClick)
-    let req = await axios(`http://171.244.141.137/user-point/${id}`, {
-      method: 'DELETE',
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": 'application/json',
-        'Authorization': `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoZWFkZXIiOnsiYWxnIjoiSFMyNTYiLCJ0eXAiOiJKV1QifSwicGF5bG9hZCI6eyJkYXRhIjp7InVpZCI6IjYwZGFiZjI3NDY4N2M3NWQ5YzRkMjk0ZSIsInVzZXJUeXBlIjoidGVhY2hlciJ9LCJpYXQiOjE2MjUxNTYwMjYsImV4cCI6MTYyNTE1OTYyNn0sImlhdCI6MTYyNTY4MDY5N30.kQi6HS92EwkRDCuSGQnAtZIfI7SpuOBTey0lZbaHfTg"}`,
-      }
-    })
-
-    return req
-  } catch (error) {
-    console.log("err", error);
+  const deletePonit = async (id) => {
+    try {
+      //   document.addEventListener('click', handleClick)
+      let req = await axios(`http://171.244.141.137/user-point/${id}`, {
+        method: 'DELETE',
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": 'application/json',
+          'Authorization': `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoZWFkZXIiOnsiYWxnIjoiSFMyNTYiLCJ0eXAiOiJKV1QifSwicGF5bG9hZCI6eyJkYXRhIjp7InVpZCI6IjYwZGFiZjI3NDY4N2M3NWQ5YzRkMjk0ZSIsInVzZXJUeXBlIjoidGVhY2hlciJ9LCJpYXQiOjE2MjUxNTYwMjYsImV4cCI6MTYyNTE1OTYyNn0sImlhdCI6MTYyNTY4MDY5N30.kQi6HS92EwkRDCuSGQnAtZIfI7SpuOBTey0lZbaHfTg"}`,
+        }
+      })
+      window.location.reload()
+      return req
+    } catch (error) {
+      console.log("err", error);
+    }
   }
-}
   const handleOk = () => {
     setConfirmLoading(true);
     setTimeout(() => {
       setVisible(false);
       setConfirmLoading(false);
+      window.location.reload()
     }, 2000);
     updatePointSubject()
+
   };
 
   const handleCancel = () => {
@@ -86,6 +94,7 @@ const  deletePonit =  async (id)=>{
   console.log("idDiem", idDiem)
   // update Ponit
   async function updatePointSubject() {
+    let item = {evaluate, TP1,TP2,THI,TKHP}
     try {
       //   document.addEventListener('click', handleClick)
       let req = await axios(`http://171.244.141.137/user-point/${idDiem}`, {
@@ -95,13 +104,7 @@ const  deletePonit =  async (id)=>{
           "Accept": 'application/json',
           'Authorization': `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoZWFkZXIiOnsiYWxnIjoiSFMyNTYiLCJ0eXAiOiJKV1QifSwicGF5bG9hZCI6eyJkYXRhIjp7InVpZCI6IjYwZGFiZjI3NDY4N2M3NWQ5YzRkMjk0ZSIsInVzZXJUeXBlIjoidGVhY2hlciJ9LCJpYXQiOjE2MjUxNTYwMjYsImV4cCI6MTYyNTE1OTYyNn0sImlhdCI6MTYyNTY4MDY5N30.kQi6HS92EwkRDCuSGQnAtZIfI7SpuOBTey0lZbaHfTg"}`,
         },
-        data: {
-          "evaluate": "KHONG DAT",
-          "TP1": "1",
-          "TP2": "9",
-          "THI": "8",
-          "TKHP": "10"
-        }
+        data:JSON.stringify(item)
       })
 
       return req
@@ -109,7 +112,6 @@ const  deletePonit =  async (id)=>{
       console.log("err", error);
     }
   }
-  const initValue = { TP1: "", TP2: "", THI: "", TKHP: "", evaluate: "" }
 
   const columns = [
 
@@ -154,7 +156,7 @@ const  deletePonit =  async (id)=>{
         const idPoint = e
         return (
           <>
-            <Button type="danger" onClick={()=>deletePonit(idPoint.key)}>Delete</Button>
+            <Button type="danger" onClick={() => deletePonit(idPoint.key)}>Delete</Button>
             <Button type="primary"   >
               <div onClick={() => showModal(setIdDiem(idPoint.key))}>Edit</div>
               <Modal
@@ -171,20 +173,20 @@ const  deletePonit =  async (id)=>{
                   <Input value="MSSV" required="mssv" />
                 </FormItem>
                 <FormItem label="TP1">
-                  <Input required="tp1" />
+                  <Input onChange={(e) => SetTP1(e.target.value)} required="tp1" />
                 </FormItem>
                 <FormItem label="TP2">
-                  <Input required="tp2" />
+                  <Input onChange={(e) => SetTP2(e.target.value)} required="tp2" />
                 </FormItem>
                 <FormItem label="THI">
-                  <Input required="thi" />
+                  <Input onChange={(e) => SetTHI(e.target.value)} required="thi" />
                 </FormItem>
                 <FormItem label="TKHP">
-                  <Input required="tkhp
+                  <Input onChange={(e) => SetTKHP(e.target.value)} required="tkhp
           " />
                 </FormItem>
                 <FormItem label="evaluate">
-                  <Input required="evaluate" />
+                  <Input onChange={(e) => SetEvaluate(e.target.value)} required="evaluate" />
                 </FormItem>
               </Modal>
             </Button >

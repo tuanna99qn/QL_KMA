@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {useGlobalState} from "../logical/glocalState";
+import { useGlobalState } from "../logical/glocalState";
 
 export const GetClass = (props) => {
   let [dataClass, setDataClass] = useState([])
@@ -22,16 +22,16 @@ export const GetClass = (props) => {
         console.log("err", error);
       }
     }
- // ham nay goi o dau day =)) ? cu get la se call duoc api a uk ok
+    // ham nay goi o dau day =)) ? cu get la se call duoc api a uk ok
     getClass()
   }, [])
-//console.log("dataClass", dataClass)
+  console.log("dataClass",dataClass)
+
   return <>
 
   </>
 
 }
-
 const _nav = [
   {
     _tag: "CSidebarNavItem",
@@ -57,7 +57,7 @@ const _nav = [
     //     name: "ClassA",
     //     to: "/subject/classA",
     //   },
-     
+
     // ],
 
   },
@@ -94,19 +94,24 @@ const _nav = [
 
 export default _nav;
 
-export  const mapToNav = (data)=>{
-  let children =  data.map(m=>({
+export const mapToNav = (data) => {
+ // let [idClas, setIdClass] = useState([])
+ // setIdClass = data._id
+//  console.log("setIdClass", setIdClass)
+  let children = data.map(m => ({
     _tag: "CSidebarNavItem",
     name: m.name,
-    to: "/subject/"+m._id,
+    to: "/subject/" + m._id,
+
   }))
   let nav = [..._nav]
-  nav.forEach(m=>{
-    if (m.name != 'Subject'){
-     // console.log("nsads",m.name)
+  nav.forEach(m => {
+    if (m.name != 'Subject') {
+
       return
     }
     m._children = children
+
   })
   return nav
 }
@@ -120,7 +125,7 @@ export const requestClass = async () => {
         'Authorization': `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoZWFkZXIiOnsiYWxnIjoiSFMyNTYiLCJ0eXAiOiJKV1QifSwicGF5bG9hZCI6eyJkYXRhIjp7InVpZCI6IjYwZGFiZjI3NDY4N2M3NWQ5YzRkMjk0ZSIsInVzZXJUeXBlIjoidGVhY2hlciJ9LCJpYXQiOjE2MjUxNTYwMjYsImV4cCI6MTYyNTE1OTYyNn0sImlhdCI6MTYyNTY4MDY5N30.kQi6HS92EwkRDCuSGQnAtZIfI7SpuOBTey0lZbaHfTg"}`,
       },
     })
- //   console.log("data class ae vao ma xem",req.data)
+    //   console.log("data class ae vao ma xem",req.data)
     return req.data
   } catch (error) {
     console.log("err", error);

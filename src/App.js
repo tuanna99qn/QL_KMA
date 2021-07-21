@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from "react";
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import './scss/style.scss';
 import {requestClass, mapToNav} from './containers/_nav'
@@ -25,11 +25,15 @@ const Class = React.lazy(()=>import('./views/subject/classA/index'))
 
 const App = () => {
   let [,setNav] = useGlobalState(global.navigationState)
+  let [idClas, setIdClass] = useState([])
+
   useEffect(()=>{
+   
     requestClass().then(m=>{
       let nav = mapToNav(m.data)
       console.log('cai nay la data menu ne thang ngu: ',nav)
       setNav(nav)
+      
      
     }).catch(e=>{
       console.log(e)

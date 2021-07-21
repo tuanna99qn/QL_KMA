@@ -39,7 +39,9 @@ const Login = () => {
             },
           data:JSON.stringify(item)
       })
-      res = await res.data
+      res = await res.data 
+      let token = res.data.accessToken
+      console.log("res",token)
       localStorage.setItem("user",JSON.stringify(res))
       history.push('/dashboard')
     } catch (error) {
